@@ -1,0 +1,14 @@
+/* 
+ * APP.CSS - CHEWBOOKA
+ * ============================================
+ * 
+ * ¿QUÉ VA AQUÍ?
+ * - Estilos específicos del componente App
+ * - Si App tiene estilos propios, van aquí
+ * - Si no, puede estar vacío o tener mínimos estilos
+ */
+
+.App {
+  width: 100%;
+  min-height: 100vh;
+}

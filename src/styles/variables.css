@@ -1,0 +1,230 @@
+/* 
+ * VARIABLES CSS - CHEWBOOKA
+ * ============================================
+ * 
+ * ¿POR QUÉ VARIABLES CSS?
+ * - Permiten cambiar el diseño de toda la app desde un solo lugar
+ * - Facilita crear temas (claro/oscuro)
+ * - Mantiene consistencia en toda la aplicación
+ * - Fácil de mantener y actualizar
+ * 
+ * ¿CÓMO FUNCIONAN?
+ * - Se definen en :root para que estén disponibles globalmente
+ * - Se usan con var(--nombre-variable) en cualquier CSS
+ * - Se pueden redefinir para crear temas diferentes
+ */
+
+:root {
+  /* ============ COLORES PRINCIPALES ==========================================
+   * Por qué azul (#1890ff)? 
+   * - Es el color que viste en la imagen de Chewbooka
+   * - Azul representa tecnología, confianza, espacio (tema galáctico)
+   * - Es un color que funciona bien en fondos oscuros y claros
+   */
+  --color-primary: #1890ff;              /* Azul principal de Chewbooka */
+  --color-primary-dark: #096dd9;         /* Versión oscura para hovers */
+  --color-primary-light: #40a9ff;        /* Versión clara para efectos */
+  --color-primary-gradient: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+  
+  /* Colores secundarios para acciones y estados */
+  --color-success: #52c41a;              /* Verde para acciones exitosas */
+  --color-warning: #faad14;              /* Amarillo para advertencias */
+  --color-error: #f5222d;                /* Rojo para errores */
+  --color-info: #1890ff;                 /* Azul para información */
+  
+  /* ============ COLORES DE FONDO ============================================
+   * ¿Por qué fondos oscuros?
+   * - La interfaz que viste tiene tema oscuro (espacio galáctico)
+   * - Reduce fatiga visual
+   * - Se ve más moderno y profesional
+   * - Mejor contraste con el azul (#1890ff)
+   */
+  --bg-primary: #0f1419;                 /* Fondo principal oscuro */
+  --bg-secondary: #1a1f2e;               /* Fondo secundario (cards, sidebar) */
+  --bg-tertiary: #252b3b;                /* Fondo terciario (elementos hover) */
+  --bg-overlay: rgba(15, 20, 25, 0.8);   /* Overlay para modales */
+  
+  /* Fondos para modo claro (por si quieres cambiar) */
+  --bg-light-primary: #ffffff;
+  --bg-light-secondary: #f5f5f5;
+  
+  /* ============ COLORES DE TEXTO ============================================
+   * ¿Por qué estos niveles de opacidad?
+   * - Crea jerarquía visual (texto más importante = más opaco)
+   * - Facilita la lectura sin saturar
+   * - Estándar de diseño moderno
+   */
+  --text-primary: rgba(255, 255, 255, 0.95);      /* Texto principal (muy visible) */
+  --text-secondary: rgba(255, 255, 255, 0.75);    /* Texto secundario (menos importante) */
+  --text-tertiary: rgba(255, 255, 255, 0.55);     /* Texto terciario (muy poco importante) */
+  --text-disabled: rgba(255, 255, 255, 0.25);     /* Texto deshabilitado */
+  --text-inverse: rgba(0, 0, 0, 0.85);            /* Texto claro sobre fondo claro */
+  
+  /* ============ ESPACIADOS (SPACING) ========================================
+   * ¿Por qué un sistema de espaciado?
+   * - Mantiene consistencia visual en toda la app
+   * - Facilita el diseño: siempre usas estos valores
+   * - Se basa en múltiplos de 4 (estándar de diseño)
+   * - Crea ritmo visual armonioso
+   */
+  --spacing-xs: 4px;                     /* Muy pequeño (iconos, gaps mínimos) */
+  --spacing-sm: 8px;                     /* Pequeño (paddings internos) */
+  --spacing-md: 16px;                    /* Medio (paddings estándar) */
+  --spacing-lg: 24px;                    /* Grande (separación entre secciones) */
+  --spacing-xl: 32px;                    /* Muy grande (márgenes principales) */
+  --spacing-xxl: 48px;                   /* Extra grande (separación de páginas) */
+  --spacing-xxxl: 64px;                  /* Máximo (espacios hero) */
+  
+  /* ============ TIPOGRAFÍA ==================================================
+   * ¿Por qué estas fuentes?
+   * - system-ui: Fuente nativa del sistema (rápida, familiar)
+   * - Inter: Moderna, legible, diseñada para pantallas
+   * - Orbitron (opcional): Da sensación espacial/futurista
+   */
+  --font-family-primary: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-family-heading: 'Inter', system-ui, sans-serif;    /* Títulos */
+  --font-family-body: 'Inter', system-ui, sans-serif;       /* Cuerpo de texto */
+  --font-family-mono: 'Courier New', 'Consolas', monospace; /* Código */
+  
+  /* Tamaños de fuente - Escala tipográfica
+   * ¿Por qué esta escala?
+   * - Crea jerarquía visual clara
+   * - Se basa en relación 1.25 (major third scale)
+   * - Funciona bien en todas las pantallas
+   */
+  --font-size-xs: 12px;                  /* Texto muy pequeño (labels, hints) */
+  --font-size-sm: 14px;                  /* Texto pequeño (textos secundarios) */
+  --font-size-base: 16px;                /* Texto base (cuerpo de texto) */
+  --font-size-md: 18px;                  /* Texto medio (énfasis) */
+  --font-size-lg: 20px;                  /* Texto grande (subtítulos) */
+  --font-size-xl: 24px;                  /* Texto extra grande (títulos) */
+  --font-size-xxl: 32px;                 /* Títulos grandes */
+  --font-size-xxxl: 40px;                /* Títulos hero */
+  --font-size-huge: 48px;                /* Títulos enormes */
+  
+  /* Pesos de fuente */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Altura de línea (line-height) */
+  --line-height-tight: 1.2;              /* Para títulos */
+  --line-height-normal: 1.5;             /* Para texto normal */
+  --line-height-relaxed: 1.75;           /* Para texto largo (lectura) */
+  
+  /* ============ BORDES Y RADIOS =============================================
+   * ¿Por qué radios de borde diferentes?
+   * - Pequeños: Botones, inputs (más serio)
+   * - Medianos: Cards estándar (equilibrado)
+   * - Grandes: Cards grandes, modales (más moderno/friendly)
+   * - Circle: Avatares, botones circulares
+   */
+  --border-radius-sm: 4px;               /* Botones, badges pequeños */
+  --border-radius-md: 8px;               /* Botones estándar, inputs */
+  --border-radius-lg: 12px;              /* Cards pequeños */
+  --border-radius-xl: 16px;              /* Cards grandes (como en la imagen) */
+  --border-radius-xxl: 24px;             /* Cards hero, modales */
+  --border-radius-circle: 50%;           /* Avatares, botones circulares */
+  --border-radius-full: 9999px;          /* Pills (botones alargados) */
+  
+  /* Anchos de borde */
+  --border-width: 1px;
+  --border-width-thick: 2px;
+  
+  /* Color de borde */
+  --border-color: rgba(255, 255, 255, 0.1);      /* Bordes sutiles */
+  --border-color-strong: rgba(255, 255, 255, 0.2); /* Bordes más visibles */
+  
+  /* ============ SOMBRAS =====================================================
+   * ¿Por qué usar sombras?
+   * - Da profundidad y jerarquía visual
+   * - Hace que los elementos "floten" sobre el fondo
+   * - Es lo que hace que los cards se vean elevados (como en la imagen)
+   * - Crean sensación de capas (layers)
+   */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);              /* Sombra muy sutil */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);               /* Sombra pequeña */
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);              /* Sombra media (cards) */
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);              /* Sombra grande */
+  --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.25);            /* Sombra extra grande */
+  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.1);      /* Sombra interna (inputs) */
+  
+  /* Sombras con color (para efectos especiales) */
+  --shadow-primary: 0 4px 12px rgba(24, 144, 255, 0.3);    /* Sombra azul (glow effect) */
+  
+  /* ============ TRANSICIONES ================================================
+   * ¿Por qué transiciones?
+   * - Hacen la interfaz más fluida y profesional
+   * - Dan feedback visual al usuario
+   * - Mejoran la experiencia de usuario
+   * - Los tiempos están optimizados (ni muy rápido ni muy lento)
+   */
+  --transition-fast: 0.15s ease;         /* Transiciones rápidas (hovers, clicks) */
+  --transition-base: 0.3s ease;          /* Transiciones estándar */
+  --transition-slow: 0.5s ease;          /* Transiciones lentas (modales, cambios de página) */
+  --transition-bounce: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Efecto bounce */
+  
+  /* ============ Z-INDEX (CAPAS) =============================================
+   * ¿Por qué z-index?
+   * - Controla qué elementos están "arriba" de otros
+   * - Necesario para modales, dropdowns, tooltips
+   * - Los valores están espaciados para evitar conflictos
+   */
+  --z-base: 0;                           /* Nivel base */
+  --z-dropdown: 1000;                    /* Dropdowns, select */
+  --z-sticky: 1020;                      /* Headers sticky */
+  --z-fixed: 1030;                       /* Elementos fixed */
+  --z-modal-backdrop: 1040;              /* Fondo de modal */
+  --z-modal: 1050;                       /* Modal */
+  --z-popover: 1060;                     /* Popovers */
+  --z-tooltip: 1070;                     /* Tooltips (siempre arriba) */
+  
+  /* ============ GRID PATTERN (FONDO) ========================================
+   * ¿Por qué grid pattern?
+   * - Es lo que viste en la imagen de fondo
+   * - Da sensación de espacio/galaxia
+   * - Crea profundidad visual sin distraer
+   * - Muy común en apps modernas
+   */
+  --grid-pattern: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  --grid-size: 20px;                     /* Tamaño del grid */
+  
+  /* ============ BREAKPOINTS (RESPONSIVE) ====================================
+   * Estos valores se usan en JavaScript para media queries
+   * - xs: móviles pequeños
+   * - sm: móviles grandes
+   * - md: tablets
+   * - lg: desktop
+   * - xl: pantallas grandes
+   */
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 768px;
+  --breakpoint-md: 1024px;
+  --breakpoint-lg: 1280px;
+  --breakpoint-xl: 1920px;
+}
+
+/* ============ MODO OSCURO ====================================================
+ * Este es el modo oscuro que viste en la imagen
+ * Las variables en :root ya están configuradas para modo oscuro
+ * Si quieres ajustar el modo oscuro, añade estilos aquí:
+ */
+
+/* [data-theme="dark"] {
+   Ejemplo: --bg-primary: #0a0f14;
+} */
+
+/* ============ MODO CLARO (si quieres añadirlo después) ======================
+ * Para cambiar a modo claro, simplemente cambia los valores de las variables
+ */
+[data-theme="light"] {
+  --bg-primary: var(--bg-light-primary);
+  --bg-secondary: var(--bg-light-secondary);
+  --text-primary: rgba(0, 0, 0, 0.85);
+  --text-secondary: rgba(0, 0, 0, 0.65);
+}
+

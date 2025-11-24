@@ -1,0 +1,321 @@
+/* 
+ * ESTILOS GLOBALES - CHEWBOOKA
+ * ============================================
+ * 
+ * ¿POR QUÉ ESTILOS GLOBALES?
+ * - Resetea estilos por defecto del navegador
+ * - Aplica estilos base a toda la app
+ * - Crea la base visual (fondo, tipografía)
+ * - Establece comportamientos por defecto
+ */
+
+/* ============ RESET Y BASE ==================================================
+ * ¿Por qué resetear estilos?
+ * - Cada navegador tiene estilos por defecto diferentes
+ * - Resetea para tener control total sobre el diseño
+ * - Evita inconsistencias entre navegadores
+ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Hace que padding y border no aumenten el tamaño total */
+}
+
+html {
+  font-size: 16px; /* Base para rem (1rem = 16px) */
+  -webkit-font-smoothing: antialiased; /* Hace el texto más suave en Mac */
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  /* Aplica el fondo oscuro con grid pattern (lo que viste en la imagen) */
+  background-color: var(--bg-primary);
+  background-image: var(--grid-pattern);
+  background-size: var(--grid-size) var(--grid-size);
+  
+  color: var(--text-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-normal);
+  
+  /* Quita márgenes por defecto */
+  margin: 0;
+  min-height: 100vh;
+  
+  /* Mejora el rendering */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============ TIPOGRAFÍA (HEADINGS) =========================================
+ * ¿Por qué estilizar los headings?
+ * - Crea jerarquía visual clara
+ * - Usa las variables para mantener consistencia
+ * - Los títulos grandes son parte del diseño que viste
+ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--font-size-xxxl); /* Título grande como "Chewbooka" */
+  font-weight: var(--font-weight-bold);
+}
+
+h2 {
+  font-size: var(--font-size-xxl);
+}
+
+h3 {
+  font-size: var(--font-size-xl);
+}
+
+h4 {
+  font-size: var(--font-size-lg);
+}
+
+h5 {
+  font-size: var(--font-size-md);
+}
+
+h6 {
+  font-size: var(--font-size-base);
+}
+
+/* ============ ELEMENTOS DE TEXTO ============================================ */
+p {
+  margin: 0;
+  line-height: var(--line-height-relaxed);
+  color: var(--text-secondary);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary-light);
+}
+
+strong, b {
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ============ BOTONES =======================================================
+ * ¿Por qué estilizar botones globalmente?
+ * - Los botones son elementos clave de la interfaz (como el de login)
+ * - Mantiene consistencia visual
+ * - Usa las variables para fácil personalización
+ */
+button {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  
+  /* Bordes redondeados como en la imagen */
+  border-radius: var(--border-radius-md);
+  border: none;
+  
+  /* Padding cómodo para click */
+  padding: var(--spacing-sm) var(--spacing-lg);
+  
+  /* Transición suave */
+  transition: all var(--transition-base);
+  
+  cursor: pointer;
+  
+  /* Quita outline por defecto, pero lo añadimos con focus */
+  outline: none;
+}
+
+button:focus-visible {
+  /* Accesibilidad: outline cuando navegas con teclado */
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Botón primario (como el azul de "Iniciar Sesión") */
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px); /* Efecto de "elevación" */
+}
+
+.btn-primary:active {
+  transform: translateY(0); /* Vuelve a posición normal al hacer click */
+}
+
+/* Botón secundario (como "Crea tu cuenta") */
+.btn-secondary {
+  background: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: rgba(24, 144, 255, 0.1); /* Fondo azul muy transparente */
+}
+
+/* ============ INPUTS ========================================================
+ * ¿Por qué estilizar inputs?
+ * - Los inputs del formulario de login necesitan estilos consistentes
+ * - Mejora la experiencia de usuario
+ * - Usa variables para fácil personalización
+ */
+input, textarea, select {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+  
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  
+  padding: var(--spacing-sm) var(--spacing-md);
+  
+  /* Transición suave */
+  transition: all var(--transition-base);
+  
+  width: 100%;
+  outline: none;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.1); /* Glow effect */
+}
+
+input::placeholder {
+  color: var(--text-tertiary);
+}
+
+/* ============ CARDS =========================================================
+ * ¿Por qué cards?
+ * - Las cards son elementos clave (como el perfil que viste)
+ * - Dan sensación de profundidad y organización
+ * - Muy usado en diseño moderno
+ */
+.card {
+  background-color: var(--bg-secondary);
+  border-radius: var(--border-radius-xl); /* Bordes redondeados como en la imagen */
+  padding: var(--spacing-lg);
+  
+  /* Sombra que hace que la card "flote" */
+  box-shadow: var(--shadow-md);
+  
+  /* Borde sutil */
+  border: 1px solid var(--border-color);
+  
+  /* Transición para efectos hover */
+  transition: all var(--transition-base);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px); /* Efecto de elevación al hover */
+}
+
+/* ============ SCROLLBAR =====================================================
+ * ¿Por qué estilizar scrollbar?
+ * - La scrollbar nativa es fea
+ * - Hace que la app se vea más profesional
+ * - Consistente con el tema oscuro
+ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-tertiary);
+  border-radius: var(--border-radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* ============ UTILIDADES ==================================================== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+.mt-md { margin-top: var(--spacing-md); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.mt-lg { margin-top: var(--spacing-lg); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+
+/* ============ ANIMACIONES ===================================================
+ * ¿Por qué animaciones?
+ * - Hacen la interfaz más fluida
+ * - Dan feedback visual
+ * - Mejoran la experiencia de usuario
+ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn var(--transition-base) ease;
+}
+
+/* ============ RESPONSIVE ====================================================
+ * ¿Por qué media queries?
+ * - Hace que la app se vea bien en móviles, tablets y desktop
+ * - Ajusta el diseño según el tamaño de pantalla
+ */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px; /* Texto más pequeño en móviles */
+  }
+  
+  h1 {
+    font-size: var(--font-size-xxl); /* Títulos más pequeños en móvil */
+  }
+  
+  .card {
+    padding: var(--spacing-md); /* Menos padding en móvil */
+  }
+}
+
+
