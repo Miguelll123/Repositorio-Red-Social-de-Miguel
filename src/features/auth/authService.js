@@ -18,14 +18,29 @@ const login = async(userData)=> {
         return res.data
     } catch(error) {
         throw error; // Lanza el error para que Redux lo capture
+    };
+};
+
+
+const logout = async ()=>{
+    const token= localStorage.getItem("token");
+    const res = await axios.delete(API_URL + '/logout',{
+        headers:{
+            authorization: token
+        },
+    });
+    if(res.data){
+        localStorage.clear();
     }
-}
+    return res.data
+};
 
 
 
 const authService = {
     register,
-    login
+    login,
+    logout
 };
 
 
