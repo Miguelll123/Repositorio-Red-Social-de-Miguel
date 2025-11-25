@@ -23,16 +23,24 @@ const login = async(userData)=> {
 
 
 const logout = async ()=>{
-    const token= localStorage.getItem("token");
-    const res = await axios.delete(API_URL + '/logout',{
-        headers:{
-            authorization: token
-        },
-    });
-    if(res.data){
-        localStorage.clear();
+    try {
+        const token = localStorage.getItem("token");
+        if (token) {
+            await axios.delete(API_URL + '/logout', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+            });
+        }
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        return { success: true };
+    } catch(error) {
+        // Aunque falle la petición, limpiamos el localStorage
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        throw error;
     }
-    return res.data
 };
 
 

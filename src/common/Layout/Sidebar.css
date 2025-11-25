@@ -9,7 +9,9 @@
   border-right: 1px solid var(--border-color);
   padding: var(--spacing-lg);
   z-index: 100;
-  overflow-y: auto; /* Scroll si el contenido es muy largo */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar-header h2 {
@@ -51,4 +53,24 @@
 
 .sidebar-label {
   font-weight: var(--font-weight-medium);
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--border-color);
+}
+
+.logout-btn {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  text-align: left;
+}
+
+.logout-btn:hover {
+  background-color: var(--bg-tertiary);
+  color: var(--color-error);
 }
