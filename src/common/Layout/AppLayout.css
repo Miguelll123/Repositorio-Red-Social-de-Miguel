@@ -1,0 +1,10 @@
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.app-content {
+  margin-left: 250px; /* Mismo ancho que el sidebar */
+  width: calc(100% - 250px);
+  padding: var(--spacing-xl);
+}
