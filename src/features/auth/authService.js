@@ -3,9 +3,15 @@ import axios from 'axios';
 const API_URL= 'http://localhost:8080/users';
 
 const register = async (formData)=> {
-    const res = await axios.post(API_URL,formData);
-    return res.data
-
+    try {
+        // Si formData es una instancia de FormData, axios detecta automáticamente
+        // y establece el Content-Type a multipart/form-data (con el boundary correcto)
+        // NO especifiques Content-Type manualmente, axios lo hace automáticamente
+        const res = await axios.post(API_URL, formData);
+        return res.data;
+    } catch(error) {
+        throw error
+    }
 };
 
 const login = async(userData)=> {

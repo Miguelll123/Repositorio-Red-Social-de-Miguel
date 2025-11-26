@@ -60,12 +60,14 @@ export default function Sidebar(){
            ))}
             </nav>
 
-            <div className="sidebar-footer">
-              <button className="sidebar-item logout-btn" onClick={onLogout}>
-                <span className="sidebar-icon"><LogoutOutlined /></span>
-                <span className="sidebar-label">Logout</span>
-              </button>
-            </div>
+            {user && (
+              <div className="sidebar-footer">
+                <button className="sidebar-item logout-btn" onClick={onLogout}>
+                  <span className="sidebar-icon"><LogoutOutlined /></span>
+                  <span className="sidebar-label">Logout</span>
+                </button>
+              </div>
+            )}
        
         </aside>
     )

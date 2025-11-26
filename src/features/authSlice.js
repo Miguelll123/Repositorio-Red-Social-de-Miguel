@@ -1,5 +1,6 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import authService from './auth/authService';
+import { message } from 'antd';
 
 const user = JSON.parse(localStorage.getItem("user"))|| null;
 const token = localStorage.getItem("token")|| null;
@@ -7,13 +8,22 @@ const token = localStorage.getItem("token")|| null;
 const initialState = {
     user:user,
     token:token,
+    isError:false,
+    isSucces:false,
+    message:"",
 };
 
 
 export const authSlice = createSlice({
     name:'auth',
     initialState,
-    reducers:{},
+    reducers:{
+        reset:(state)=>{
+       state.isError=false,
+       state.isSucces=false,
+       state.message= ""
+        }
+    },
     extraReducers:(builder)=>{
         builder
         .addCase(login.fulfilled,(state,action)=>{
@@ -32,16 +42,27 @@ export const authSlice = createSlice({
         state.token='';
 
        })
+       .addCase(register.fulfilled,(state,action)=>{
+            if(action.payload){
+                state.isSucces=true;
+                state.message=action.payload.msg || action.payload.message || 'Registro exitoso';
+            }
+       })
+       .addCase(register.rejected,(state,action)=>{
+        state.isError=true;
+        state.message=action.payload
+       })
     }
 });
-
+export const {reset} = authSlice.actions
 
 export const register = createAsyncThunk('auth/register',
     async(user)=>{
     try {
    return await authService.register(user);
     } catch(error){
-        console.error(error)
+        const message = error.response.data.error[0].message;
+        return thunkAPI.rejectwithVAlue(message)
     }
 });
 
