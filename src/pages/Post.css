@@ -1,0 +1,25 @@
+
+/* Tus estilos personalizados usando tus variables CSS */
+.posts {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-color);
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-md);
+}
+
+.posts .header.posts {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.posts h3 {
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.posts p {
+  color: var(--text-secondary);
+}
