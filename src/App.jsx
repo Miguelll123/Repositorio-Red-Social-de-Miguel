@@ -35,7 +35,7 @@ function App() {
           <Route path='/' element={<ProtectedRoute><AppLayout /></ProtectedRoute>}>
             <Route index element={<Navigate to="/dashboard" replace />} />
             <Route path='dashboard' element={<Dashboard />} />
-            <Route path='search' element={<Search />} />
+            <Route path='search/:searchTerm?' element={<Search />} />
             <Route path='profile' element={<Profile />} />
             <Route path='create-post' element={<CreatePost />} />
           </Route>

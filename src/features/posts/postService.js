@@ -8,9 +8,14 @@ const getALl = async()=>{
     return res.data
 };
 
+const searchByTitle = async(title)=> {
+    const res = await axios.get(`${API_URL}/title/${title}`);
+    return res.data
+}
 
 const postService = {
-    getALl
+    getALl,
+    searchByTitle
 };
 
 

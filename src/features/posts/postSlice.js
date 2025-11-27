@@ -13,6 +13,15 @@ export const getALl = createAsyncThunk("posts/getAll",async()=>{
     } catch(error) {
         console.error(error)
     }
+});
+
+export const searchByTitle = createAsyncThunk("posts/searchByTitle",async(title)=>{
+    try {
+   return await postService.searchByTitle(title);
+
+    } catch(error){
+        console.error(error)
+    }
 })
 
 // ✅ DESPUÉS el slice que lo usa
@@ -32,6 +41,13 @@ export const postSlice = createSlice({
         })
         .addCase(getALl.pending,(state)=>{
         state.isLoading=true;
+        })
+        .addCase(searchByTitle.fulfilled,(state,action)=>{
+            state.posts=action.payload;
+            state.isLoading=false;
+        })
+        .addCase(searchByTitle.pending,(state)=>{
+            state.isLoading=true;
         })
     }
 })
