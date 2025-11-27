@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Card,Avatar } from 'antd';
 import {UserOutlined} from '@ant-design/icons';
-import './Post.css';
+import '../Post.css';
 
 const API_URL = 'http://localhost:8080';
 
@@ -60,7 +60,7 @@ const postElements = posts.map((post)=>{
 
      {postImageUrl && (
       <img src={postImageUrl} alt={post.title}/>
-    )}
+     )}
     </Card>
    )
 });

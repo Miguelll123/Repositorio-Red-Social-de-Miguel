@@ -15,7 +15,7 @@ import { store } from './app/store';
 import AppLayout from './common/Layout/AppLayout';
 import Login from './components/Login';
 import Register from './components/Register';
-import Dashboard from './pages/Dashboard';
+import Dashboard from './pages/posts/Dashboard';
 import Search from './pages/Search';
 import Profile from './pages/Profile';
 import CreatePost from './pages/CreatePost';

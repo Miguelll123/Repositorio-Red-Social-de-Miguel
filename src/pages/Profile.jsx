@@ -4,11 +4,14 @@ const API_URL = 'http://localhost:8080';
 
 export default function Profile() {
   const {user} = useSelector((state)=>state.auth);
-
+  const {posts} = useSelector((state)=>state.posts);
   // Construir la URL completa de la imagen
   const imageUrl = user?.image 
     ? `${API_URL}/${user.image}` 
     : null;
+
+  const postImageAuthor = posts.author?.image ?
+  `${API_URL}/${posts.author.image}` : null;
 
   return (
     <div>
@@ -23,6 +26,15 @@ export default function Profile() {
         />
       ) : (
         <p>No hay imagen de perfil</p>
+      )}
+      {postImageAuthor ? (
+        <img 
+        src={postImageAuthor}
+        alt={posts?.author.image}
+        style={{width: '200px', height: '200px'}} 
+        />
+      ):(
+        <p>Todavia no tiene publicaciones</p>
       )}
     </div>
   );
