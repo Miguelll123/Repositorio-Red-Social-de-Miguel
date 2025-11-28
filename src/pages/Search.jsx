@@ -25,8 +25,24 @@ useEffect(()=>{
 useEffect(()=>{
   if(searchTerm){
     dispatch(searchByTitle(searchTerm))
+  } else {
+    dispatch(getALl())
   }
 },[searchTerm,dispatch]);
+
+//USEFECT para recoger por cada letra que escriba 
+
+useEffect(()=>{
+  if(title.length > 2){
+    const timer = setTimeout(()=>{
+      navigate(`/search/${title.trim()}`); // ← Faltaba la barra inicial
+    },500)
+    return () => clearTimeout(timer); // ← IMPORTANTE: Limpiar el timer
+  } else if(title.length === 0){
+    // Si borras todo, volver a /search
+    navigate('/search');
+  }
+},[title,navigate])
 
 // Función handleSearch: Conectar input con URL
 
@@ -38,12 +54,7 @@ const handleSearch = (value)=> {
   }
 
 }
-
-
-
-
-
-
+ 
   return (
   <div>
     <h1>Buscador</h1>
