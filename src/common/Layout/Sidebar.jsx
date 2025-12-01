@@ -30,7 +30,7 @@ export default function Sidebar(){
       icon: <SearchOutlined />
     },
     {
-      path: '/profile', 
+        path: '/profile', 
       label: 'Profile', 
       icon: <UserOutlined /> 
     },

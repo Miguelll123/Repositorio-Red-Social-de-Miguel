@@ -1,7 +1,8 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-import { Card,Avatar } from 'antd';
-import {UserOutlined} from '@ant-design/icons';
+import { useSelector, useDispatch } from 'react-redux'
+import { Card,Avatar, notification } from 'antd';
+import {UserOutlined, LikeOutlined, CommentOutlined} from '@ant-design/icons';
+import { like } from '../../features/posts/postSlice';
 import '../Post.css';
 
 const API_URL = 'http://localhost:8080';
@@ -10,6 +11,7 @@ export const Post = () => {
 
 const {posts} = useSelector((state)=>state.posts);
 const {user} = useSelector((state)=>state.auth);
+const dispatch = useDispatch();
 
 
 if (!posts || posts.length === 0) {
@@ -44,6 +46,35 @@ const postElements = posts.map((post)=>{
          : `${API_URL}/${post.image}`)
      : null;
 
+   // Verificar si el usuario ya dio like a este post
+   const hasUserLiked = user && post.likes?.some(likeUser => {
+     // Puede ser un objeto con _id o directamente el _id
+     const likeUserId = typeof likeUser === 'object' ? likeUser._id : likeUser;
+     return likeUserId === user._id || likeUserId === user.id;
+   });
+
+   // Handler para cuando se hace clic en el like
+   const handleLikeClick = async () => {
+     if (user && !hasUserLiked) {
+       try {
+         await dispatch(like(post._id)).unwrap();
+       } catch (error) {
+         // Si el error es que ya dio like, mostrar notificación
+         if (error?.message?.includes('Ya has dado like')) {
+           notification.warning({
+             message: 'Like duplicado',
+             description: 'Ya has dado like a este post.',
+           });
+         }
+       }
+     } else if (hasUserLiked) {
+       notification.info({
+         message: 'Ya has dado like',
+         description: 'Solo puedes dar like una vez a cada post.',
+       });
+     }
+   };
+
    return (
     <Card
     className='posts' key={post._id} >
@@ -61,6 +92,36 @@ const postElements = posts.map((post)=>{
      {postImageUrl && (
       <img src={postImageUrl} alt={post.title}/>
      )}
+     
+     {/* Iconos de likes y comentarios */}
+     <div style={{ 
+       display: 'flex', 
+       gap: '16px', 
+       marginTop: '12px', 
+       paddingTop: '12px', 
+       borderTop: '1px solid #f0f0f0',
+       fontSize: '14px',
+       color: '#666'
+     }}>
+       <span 
+         onClick={handleLikeClick}
+         style={{ 
+           display: 'flex', 
+           alignItems: 'center', 
+           cursor: (user && !hasUserLiked) ? 'pointer' : 'not-allowed',
+           opacity: (user && !hasUserLiked) ? 1 : 0.5,
+           color: hasUserLiked ? '#1890ff' : '#666'
+         }}
+         title={hasUserLiked ? 'Ya has dado like a este post' : user ? 'Dar like' : 'Inicia sesión para dar like'}
+       >
+         <LikeOutlined style={{ marginRight: '4px' }} />
+         {post.likes?.length || 0}
+       </span>
+       <span style={{ display: 'flex', alignItems: 'center' }}>
+         <CommentOutlined style={{ marginRight: '4px' }} />
+         {post.comments?.length || 0}
+       </span>
+     </div>
     </Card>
    )
 });

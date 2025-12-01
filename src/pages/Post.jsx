@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Card,Avatar } from 'antd';
-import {UserOutlined} from '@ant-design/icons';
+import {UserOutlined,LikeOutlined,CommentOutlined} from '@ant-design/icons';
 import './Post.css';
 
 const API_URL = 'http://localhost:8080';
@@ -61,6 +61,25 @@ const postElements = posts.map((post)=>{
      {postImageUrl && (
       <img src={postImageUrl} alt={post.title}/>
     )}
+    {/* Iconos de likes y comentarios */}
+     <div style={{ 
+       display: 'flex', 
+       gap: '16px', 
+       marginTop: '12px', 
+       paddingTop: '12px', 
+       borderTop: '1px solid #f0f0f0',
+       fontSize: '14px',
+       color: '#666'
+     }}>
+       <span>
+         <LikeOutlined style={{ marginRight: '4px' }} />
+         {post.likes?.length || 0}
+       </span>
+       <span>
+         <CommentOutlined style={{ marginRight: '4px' }} />
+         {post.comments?.length || 0}
+       </span>
+     </div>
     </Card>
    )
 });
