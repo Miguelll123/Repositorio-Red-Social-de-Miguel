@@ -52,6 +52,15 @@ export const authSlice = createSlice({
         state.isError=true;
         state.message=action.payload
        })
+       .addCase(getUserProfile.fulfilled,(state,action)=>{
+        if(action.payload){
+            state.user = action.payload.user;
+        }
+       })
+       .addCase(toggleFollow.fulfilled,(state,action)=>{
+        // Después de seguir/dejar de seguir, recargar el perfil
+        // O actualizar manualmente los followers/following
+       })
     }
 });
 export const {reset} = authSlice.actions
@@ -84,7 +93,29 @@ export const logout = createAsyncThunk('auth/logout',
             console.error(error)
         }
     }
-)
+);
+
+export const getUserProfile = createAsyncThunk('auth/getUserProfile',
+    async(_, thunkAPI)=>{
+        try {
+            return await authService.getUserProfile();
+        } catch(error) {
+            console.error(error);
+            throw error;
+        }
+    }
+);
+
+export const toggleFollow = createAsyncThunk('auth/toggleFollow',
+    async(userId, thunkAPI)=> {
+        try {
+            return await authService.toggleFollow(userId);
+        } catch(error){
+            console.error(error);
+            throw error;
+        }
+    }
+);
 
 
 
