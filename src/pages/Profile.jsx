@@ -41,15 +41,7 @@ export default function Profile() {
       : null;
 
     return (
-      <Card key={post._id} className='posts' style={{ marginBottom: '16px' }}>
-        <div className='header posts'>
-          {imageUrl ? (
-            <Avatar src={imageUrl} />
-          ) : (
-            <Avatar icon={<UserOutlined/>} />
-          )}
-          {user?.username}
-        </div> 
+      <Card key={post._id} className='posts' style={{ marginBottom: '16px',height:'700px',justifyContent:'center',alignContent:'center' }}>
         <h3>{post.title}</h3>
         <p>{post.content}</p>
         {postImageUrl && (

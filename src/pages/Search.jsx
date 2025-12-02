@@ -56,39 +56,37 @@ const handleSearch = (value)=> {
 }
  
   return (
-  <div>
+  <div className="Total-container">
     <h1>Buscador</h1>
     
-    {/* Input de búsqueda */}
     <Input.Search
       placeholder="Buscar posts por título..."
-      value={title}  // Lo que está escrito
-      onChange={(e) => setTitle(e.target.value)}  // Actualizar mientras escribes
-      onSearch={handleSearch}  // Ejecutar cuando presionas Enter
+      value={title}
+      onChange={(e) => setTitle(e.target.value)}
+      onSearch={handleSearch}
       enterButton="Buscar"
       size="large"
       style={{ marginBottom: '20px', maxWidth: '500px' }}
     />
 
-    {/* Mostrar loading */}
     {isLoading && <p>Cargando...</p>}
 
-    {/* Mostrar resultados */}
-    {!isLoading && (
-      <>
-        {/* Mostrar término de búsqueda si existe */}
-        {searchTerm && (
-          <p>Resultados para: <strong>{searchTerm}</strong></p>
-        )}
-        
-        {/* Mostrar posts o mensaje de "no encontrados" */}
-        {posts && posts.length > 0 ? (
-          <Post />  // Reutiliza el componente Post que ya tienes
-        ) : (
-          <p>No se encontraron posts</p>
-        )}
-      </>
-    )}
+    <div className="Post-Container" style={{width:'100%', marginBottom:'50px'}}>
+      {!isLoading && (
+        <div className="container-renderizado" style={{width:'100%'}}>
+          {searchTerm && (
+            <p style={{marginBottom:'20px'}}>Resultados para: <strong>{searchTerm}</strong></p>
+          )}
+
+          {posts && posts.length > 0 ? (
+            <Post />
+          ) : (
+            <p>No se encontraron posts</p>
+          )}
+        </div>
+      )}
+    </div>
   </div>
-)
+);
+
 }
