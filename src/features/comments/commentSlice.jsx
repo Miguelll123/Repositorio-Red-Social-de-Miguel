@@ -17,11 +17,11 @@ export const getCommentsByPost = createAsyncThunk("comments/getCommentsByPost",a
 });
 
 
-export const createComment = createAsyncThunk("comments/createComment",async(postId,comment,thunkAPI)=>{
+export const createComment = createAsyncThunk("comments/createComment",async({postId,comment},thunkAPI)=>{
     try {
 
    const token = thunkAPI.getState().auth.token;
-   return await commentService.createComment(postId,token,comment);    
+   return await commentService.createComment(postId,comment,token);    
     } catch(error){
         if(error.response && error.response.status === 400) {
          return thunkAPI.rejectWithValue(error.response.data);
@@ -38,14 +38,18 @@ export const commentSlice = createSlice({
     extraReducers:(builder)=>{
         builder
         .addCase(getCommentsByPost.fulfilled,(state,action)=>{
-            state.commentsByPost[postId] = action.payload;
+            state.commentsByPost[action.meta.arg] = action.payload;
             state.isLoading = false;
         })
         .addCase(getCommentsByPost.pending,(state)=>{
             state.isLoading= true;
         })
         .addCase(createComment.fulfilled,(state,action)=>{
-            state.commentsByPost[postId] = [...state.commentsByPost[postId],action.payload];
+            const postId = action.meta.arg.postId;
+            if (!state.commentsByPost[postId]) {
+                state.commentsByPost[postId] = [];
+            }
+            state.commentsByPost[postId].push(action.payload);
             state.isLoading= false;
         })
         .addCase(createComment.pending,(state)=>{

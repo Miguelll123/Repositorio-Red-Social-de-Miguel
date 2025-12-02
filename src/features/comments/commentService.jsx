@@ -9,7 +9,7 @@ const getCommentsByPost = async (postId) => {
 };
 
 const createComment = async (postId,comment,token)=> {
-   const res = await axios.post(`${API_URL}/post/${postId}`,{},
+   const res = await axios.post(`${API_URL}/post/${postId}`,{comment},
     {
         headers: {
             Authorization: `Bearer ${token}`
