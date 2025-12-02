@@ -68,10 +68,12 @@ return (
           alt={`${user?.username} avatar`}
           className="Profile-avatar"
           style={{
-            width:'150px',
-            height:'150px',
+            width:'220px',
+            height:'220px',
             borderRadius:'50%',
-            objectFit:'cover'
+            objectFit:'cover',
+            border: '3px solid #40a9ff'
+        
             
           }}
         />
@@ -79,9 +81,9 @@ return (
         <p>No hay imagen de perfil</p>
       )}
 
-      <div className="Profile-info">
-        <h2>{user?.username}</h2>
-        <p>{user?.email}</p>
+      <div className="Profile-info" style={{gap:'20px',color:'#0d6efd'}}>
+        <h2 style={{padding:'20px'}}>{user?.username}</h2>
+        <p style={{color:'#40a9ff'}}>{user?.email}</p>
       </div>
     </div>
 
