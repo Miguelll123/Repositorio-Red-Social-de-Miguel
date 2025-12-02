@@ -6,6 +6,8 @@
   border-radius: var(--border-radius-md);
   margin-bottom: var(--spacing-md);
   padding: var(--spacing-md);
+  width: 100%;
+  max-width: 100%;
 }
 
 .posts .header.posts {
@@ -22,4 +24,15 @@
 
 .posts p {
   color: var(--text-secondary);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.posts img {
+  width: 100%;
+  max-width: 100%;
+  height: 80%;
+  border-radius: var(--border-radius-md);
+  margin-top: var(--spacing-sm);
+  object-fit: cover;
 }

@@ -45,7 +45,7 @@ const postElements = posts.map((post)=>{
      : null;
 
    return (
-    <Card
+    <Card 
     className='posts' key={post._id} >
     <div className='header posts'>
      {authorImageUrl ?  (
@@ -64,7 +64,7 @@ const postElements = posts.map((post)=>{
     </Card>
    )
 });
-return <div>{postElements}</div>;
+return <div style={{display:'flex', flexDirection:'column', gap:'16px', width:'100%', maxWidth:'800px', margin:'0 auto'}}>{postElements}</div>;
 };
 
 export default Post
