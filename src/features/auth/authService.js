@@ -49,12 +49,50 @@ const logout = async ()=>{
     }
 };
 
+const getUserProfile = async () => {
+    try {
+        const token = localStorage.getItem("token");
+        if (token) {
+            const res = await axios.get(API_URL + '/me', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return res.data;
+        }
+    } catch(error) {
+        console.error(error);
+        throw error;
+    }
+};
 
+const toggleFollow = async (userId) => {
+    try {
+        const token = localStorage.getItem("token");
+        if (token) {
+            const res = await axios.post(
+                API_URL + '/follow/' + userId,
+                {},
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            return res.data;
+        }
+    } catch(error) {
+        console.error(error);
+        throw error;
+    }
+};
 
 const authService = {
     register,
     login,
-    logout
+    logout,
+    getUserProfile,
+    toggleFollow
 };
 
 
