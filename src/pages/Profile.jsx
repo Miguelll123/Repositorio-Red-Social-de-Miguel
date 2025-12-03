@@ -40,9 +40,9 @@ const followElements = user?.followers?.map((follower)=>{
       `${API_URL}/${follower.image}` : null
 
       return (
-        <div key={follower._id} style={{display:'flex',alignItems:'center',gap:'12px'}}>
+        <div key={follower._id} style={{display:'flex',alignItems:'center',justifyContent:'center',gap:'12px'}}>
        <Avatar src={followeImageUrl} icon={<UserOutlined/>} />
-       <span>{follower.username}</span>
+       <span style={{color:'white'}}>{follower.username}</span>
        <button>Follow</button>
        <button>Unfollow</button>
         </div>
@@ -58,9 +58,9 @@ const folllowingElements = user?.following?.map((followi)=>{
   return (
     <div key={followi._id} style={{display:'flex',alignItems:'center',gap:'12px'}}>
     <Avatar src={followingImageUrl} icon={<UserOutlined/>}/>
-    <span>{followi.username}</span>
-    <button>Follow</button>
-    <button>UnFollow</button>
+    <span style={{color:'white'}}>{followi.username}</span>
+    <button style={{width:'100px',margin:'0 auto'}}>Follow</button>
+    <button style={{width:'100px',margin:'0 auto'}}>UnFollow</button>
     </div>
   )
 });
@@ -138,12 +138,12 @@ const folllowingElements = user?.following?.map((followi)=>{
         </div>
       </div>
 
-      <Tabs style={{display:'flex',alignItems:'center',justifyContent:'center'}}
+      <Tabs style={{display:'flex',alignItems:'center',justifyContent:'center',color:'white'}}
         activeKey={activeTab}
         onChange={setActiveTab}
         items={[
         {
-          key: 'posts',
+          key : 'posts',
           label: `Mis Posts (${userPosts.length})`,
           children: <div>{postElements}</div> // ← Aquí van los posts
         },
