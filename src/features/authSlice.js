@@ -7,6 +7,7 @@ const token = localStorage.getItem("token")|| null;
 
 const initialState = {
     user:user,
+    allUsers:[],
     token:token,
     isError:false,
     isSucces:false,
@@ -61,6 +62,9 @@ export const authSlice = createSlice({
         // Después de seguir/dejar de seguir, recargar el perfil
         // O actualizar manualmente los followers/following
        })
+       .addCase(getALLUsers.fulfilled,(state,action)=>{
+            state.allUsers = action.payload
+       })
     }
 });
 export const {reset} = authSlice.actions
@@ -113,6 +117,16 @@ export const toggleFollow = createAsyncThunk('auth/toggleFollow',
         } catch(error){
             console.error(error);
             throw error;
+        }
+    }
+);
+export const getALLUsers = createAsyncThunk('auth/getALLUsers',
+    async()=>{
+        try {
+        return await authService.getALLUsers();
+        } catch(error){
+            console.error(error)
+            throw error
         }
     }
 );

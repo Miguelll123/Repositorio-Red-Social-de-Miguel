@@ -2,7 +2,7 @@ import { useSelector,useDispatch } from "react-redux";
 import { Card, Avatar,Tabs } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { useState,useEffect } from "react";
-import { getUserProfile } from "../features/authSlice";
+import { getALLUsers, getUserProfile, toggleFollow } from "../features/authSlice";
 
 
 const API_URL = 'http://localhost:8080';
@@ -18,7 +18,7 @@ const convertImgurUrl = (url) => {
 };
 
 export default function Profile() {
-  const {user} = useSelector((state)=>state.auth);
+  const {user, allUsers} = useSelector((state)=>state.auth);
   const {posts} = useSelector((state)=>state.posts);
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState('posts');
@@ -30,6 +30,55 @@ export default function Profile() {
       dispatch(getUserProfile())
     }
   },[activeTab])
+
+  // USEeFFECT para montar USUARIOS
+ useEffect(()=>{
+  if(activeTab ==='users'){
+    dispatch(getALLUsers())
+  }
+ },[activeTab])
+
+ const handleToggleFollow = async (userId) => {
+  try {
+    await dispatch(toggleFollow(userId)).unwrap();
+    await dispatch(getUserProfile());
+    if(activeTab === 'users'){
+      await dispatch(getALLUsers());
+    }
+  } catch(error){
+    console.error(error);
+  }
+ };
+
+  // MONTAR TODOS LOS USUARIOS 
+   const allUserElements = allUsers?.map((userItem)=>{
+    const isFollowing = user?.following?.some((followedUser)=>
+      String(followedUser._id) === String(userItem._id)
+    );
+    // Verificar si es el usuario actual(No mostrar el boton)
+    const isCurrentUser = String(user?._id) === String(userItem._id)
+
+    const userImageUrl = userItem?.image ?
+    (userItem.image.startsWith('http')) ?
+     convertImgurUrl(userItem.image) :
+     `${API_URL}/${userItem.image}` : null
+   
+     return (
+      <div key={userItem._id} style={{display:'flex',alignItems:'center',gap:'12px'}}>
+        <Avatar src={userImageUrl} icon={<UserOutlined/>}/>
+       <span>{userItem.username}</span>
+       {!isCurrentUser && (
+        <button onClick={()=>handleToggleFollow(userItem._id)}>
+        {isFollowing ? 'dejar de seguir' : 'seguir ' }
+        </button>
+       )}
+
+
+      </div>
+     )
+})
+
+
 
 // MONTAR LOS SEGUIDORES RECORRIENDOLOS
 
@@ -156,6 +205,11 @@ const folllowingElements = user?.following?.map((followi)=>{
           key: 'following',
           label: `Siguiendo (${user?.following?.length || 0})`,
           children: <div>{folllowingElements}</div> // ← Aquí van los following
+        },
+        {
+          key : 'users',
+          label: 'Users',
+          children: <div>{allUserElements}</div>
         }
       ]}
       />

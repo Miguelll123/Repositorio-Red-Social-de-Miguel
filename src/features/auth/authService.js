@@ -87,12 +87,30 @@ const toggleFollow = async (userId) => {
     }
 };
 
+const getALLUsers = async()=> {
+    try {
+        const token = localStorage.getItem("token");
+        if(token){
+            const res = await axios.get(API_URL, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return res.data;
+        }
+    } catch(error){
+        console.error(error);
+        throw error;
+    }
+}
+
 const authService = {
     register,
     login,
     logout,
     getUserProfile,
-    toggleFollow
+    toggleFollow,
+    getALLUsers
 };
 
 
