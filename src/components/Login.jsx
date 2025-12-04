@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react';
 import { login  } from '../features/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import './Login.css';
 
 
 const Login = () => {
@@ -39,7 +40,7 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form className='Login-container' onSubmit={onSubmit}>
       <input type='email' name='email' value={email} onChange={onChange} />
       <input type='password' name='password' value={password} onChange={onChange} />
       <button type='submit'>Login</button>
