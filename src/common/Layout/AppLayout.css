@@ -7,4 +7,5 @@
   margin-left: 250px; /* Mismo ancho que el sidebar */
   width: calc(100% - 250px);
   padding: var(--spacing-xl);
+  padding-top: 100px;
 }
